@@ -13,7 +13,7 @@ const axiosConfig = {
   data: `fields name,cover.url,slug,summary,platforms.name,release_dates.human ;
   where themes != (42) & category != (1,2,5,6,7) & first_release_date >${
     (Date.now() / 1000) | 0
-  };limit 200;
+  };limit 100;
   sort first_release_date asc;`,
 };
 

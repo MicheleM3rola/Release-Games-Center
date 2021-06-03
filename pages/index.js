@@ -1,8 +1,27 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import ConsoleFilter from "../components/ConsoleFilter";
 import styles from "../styles/Home.module.css";
+import GameList from "../components/GameList";
 
-export default function Home() {
+export default function Home({ games }) {
+  const [allGames, setAllGames] = useState(games);
+  const [sortedGames, setSortedGames] = useState([]);
+
+  const filterGames = (console) => {
+    let allGamez = games.map((game) => {
+      return {
+        ...game,
+        platforms: game.platforms.filter((g) => g.id === console),
+      };
+    });
+
+    const gamesPerConsole = allGamez.filter((g) => g.platforms[0]);
+
+    setSortedGames(gamesPerConsole);
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -14,8 +33,19 @@ export default function Home() {
           />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <h1 className={styles.title}>Games Releases Center</h1>
+
+        <ConsoleFilter />
+        <GameList />
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`http://localhost:3000/api/games`);
+  const games = await res.json();
+
+  // Pass data to the page via props
+  return { props: { games } };
 }
