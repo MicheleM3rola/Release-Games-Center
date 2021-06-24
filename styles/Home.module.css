@@ -1,6 +1,7 @@
 .container {
-  width: 70%;
-  height: 100vh;
+  position: relative;
+  width: 80%;
+
   margin: auto;
   margin-top: 200px;
   background: rgba(0, 0, 0, 0.8);

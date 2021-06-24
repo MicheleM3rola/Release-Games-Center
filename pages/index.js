@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import ConsoleFilter from "../components/ConsoleFilter";
@@ -6,21 +6,29 @@ import styles from "../styles/Home.module.css";
 import GameList from "../components/GameList";
 
 export default function Home({ games }) {
-  const [allGames, setAllGames] = useState(games);
   const [sortedGames, setSortedGames] = useState([]);
 
+  const getGames = () => {
+    return setSortedGames(games);
+  };
+
   const filterGames = (console) => {
-    let allGamez = games.map((game) => {
+    let allGamez = [...sortedGames];
+
+    allGamez = games.map((game) => {
       return {
         ...game,
-        platforms: game.platforms.filter((g) => g.id === console),
+        platforms: game.platforms.filter((g) => g.name === console),
       };
     });
 
-    const gamesPerConsole = allGamez.filter((g) => g.platforms[0]);
-
-    setSortedGames(gamesPerConsole);
+    if (console !== "All Games") {
+      allGamez = allGamez.filter((g) => g.platforms[0]);
+    }
+    setSortedGames(allGamez);
   };
+
+  console.log(sortedGames);
 
   return (
     <>
@@ -34,8 +42,8 @@ export default function Home({ games }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <ConsoleFilter />
-        <GameList />
+        <ConsoleFilter games={games} gamesFiltred={filterGames} />
+        <GameList sortedGames={sortedGames} getGames={getGames} />
       </div>
     </>
   );

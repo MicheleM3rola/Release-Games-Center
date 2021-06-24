@@ -1,0 +1,41 @@
+.Card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(20% - 20px);
+  margin: 0 10px 20px;
+  border-radius: 8px;
+}
+.innerCard {
+  position: relative;
+  display: inline-block;
+  transition: 0.1s;
+  width: 80%;
+}
+.imgCard {
+  width: 100%;
+  border-radius: 8px;
+}
+.titleCard {
+  padding-top: 8px;
+  width: 100%;
+  text-align: center;
+  color: blanchedalmond;
+}
+
+.date {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+  color: white;
+  font-weight: 700;
+  background-color: black;
+  border-radius: 8px;
+}
+
+.date p {
+  padding: 3px;
+}
