@@ -6,8 +6,8 @@ const axiosConfig = {
   baseURL: "https://api.igdb.com/v4/",
   headers: {
     Accept: "application/json",
-    "Client-ID": "74zdi5a2n53tk51bkx2nomygap4287",
-    Authorization: "Bearer t836371b8a9w12faxkgq3nuunxfawg",
+    "Client-ID": process.env.CLIENT_ID,
+    Authorization: process.env.AUTHORIZATION,
   },
   method: "POST",
   data: `fields name,cover.url,slug,summary,platforms.name,release_dates.human ;
