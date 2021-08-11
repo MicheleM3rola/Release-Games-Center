@@ -51,6 +51,7 @@ export default function Home({ games }) {
 
 export async function getServerSideProps() {
   // Fetch data from external API
+
   const res = await fetch(`https://release-games-center.vercel.app/api/games`);
   const games = await res.json();
 
